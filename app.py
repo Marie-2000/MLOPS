@@ -4,8 +4,8 @@ import joblib
 app = Flask(__name__)
 
 # Charger le modèle et le vectorizer
-model = joblib.load(r'C:/Users/marie/MLOPS/spam_classifier.pkl')
-vectorizer = joblib.load(r'C:/Users/marie/MLOPS/vectorizer.pkl')
+model = joblib.load('/app/spam_classifier.pkl')
+vectorizer = joblib.load('/app/vectorizer.pkl')
 
 # HTML de base intégré (pas besoin de fichier externe)
 HTML_FORM = """
