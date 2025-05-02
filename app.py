@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template_string
 import joblib
+import pandas as pd
 from sklearn.metrics import accuracy_score
 
 app = Flask(__name__)
@@ -8,7 +9,7 @@ app = Flask(__name__)
 model = joblib.load('/app/spam_classifier.pkl')
 vectorizer = joblib.load('/app/vectorizer.pkl')
 
-# HTML de base intégré (pas besoin de fichier externe)
+# HTML de base intégré
 HTML_FORM = """
 <!doctype html>
 <title>Spam Classifier</title>
@@ -27,18 +28,24 @@ def home():
 def predict():
     message = request.form['message']
     vect_msg = vectorizer.transform([message])
-    
-    # Prédiction
     prediction = model.predict(vect_msg)
     result = "SPAM" if prediction[0] == 'spam' else "HAM"
+    return f"<h3>Résultat : {result}</h3><a href='/'>↩ Retour</a>"
+
+@app.route('/monitor')
+def monitor():
+    # Exemple de données de test pour la surveillance
+    test_data = pd.DataFrame({
+        'message': ['Free money!!!', 'How are you?', 'Win a prize now!', 'See you tomorrow'],
+        'label': ['spam', 'ham', 'spam', 'ham']
+    })
     
-    # Calcul de l'accuracy si vous avez des données de vérité terrain
-    # Exemple avec une vérité terrain fictive. Remplacez-la avec des vraies étiquettes si disponible.
-    y_true = ['spam']  # Remplacez ceci par la vraie étiquette dans un cas réel
-    accuracy = accuracy_score(y_true, prediction)
+    X_test = vectorizer.transform(test_data['message'])
+    y_true = test_data['label']
+    y_pred = model.predict(X_test)
     
-    # Affichage de l'accuracy dans la page
-    return f"<h3>Résultat : {result}</h3><p>Accuracy: {accuracy}</p><a href='/'>↩ Retour</a>"
+    accuracy = accuracy_score(y_true, y_pred)
+    return f"<h3>Accuracy en production : {accuracy:.2f}</h3>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
