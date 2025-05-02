@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template_string
 import joblib
+from sklearn.metrics import accuracy_score
 
 app = Flask(__name__)
 
@@ -26,9 +27,18 @@ def home():
 def predict():
     message = request.form['message']
     vect_msg = vectorizer.transform([message])
+    
+    # Prédiction
     prediction = model.predict(vect_msg)
     result = "SPAM" if prediction[0] == 'spam' else "HAM"
-    return f"<h3>Résultat : {result}</h3><a href='/'>↩ Retour</a>"
+    
+    # Calcul de l'accuracy si vous avez des données de vérité terrain
+    # Exemple avec une vérité terrain fictive. Remplacez-la avec des vraies étiquettes si disponible.
+    y_true = ['spam']  # Remplacez ceci par la vraie étiquette dans un cas réel
+    accuracy = accuracy_score(y_true, prediction)
+    
+    # Affichage de l'accuracy dans la page
+    return f"<h3>Résultat : {result}</h3><p>Accuracy: {accuracy}</p><a href='/'>↩ Retour</a>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
