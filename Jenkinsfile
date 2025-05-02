@@ -3,9 +3,9 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            steps {
+            steps {   
                 // Cloner le dépôt Git
-                git 'https://github.com/ton-utilisateur/ton-depot.git'
+               git credentialsId: 'bcbfb519-cbf9-4eb8-a522-dd9008ffe6ac', url: 'https://github.com/Marie-2000/MLOPS.git'
             }
         }
 
