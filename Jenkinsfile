@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {   
                 // Cloner le dépôt Git
-               git credentialsId: 'bcbfb519-cbf9-4eb8-a522-dd9008ffe6ac', url: 'https://github.com/Marie-2000/MLOPS.git'
+                git credentialsId: 'bcbfb519-cbf9-4eb8-a522-dd9008ffe6ac', url: 'https://github.com/Marie-2000/MLOPS.git'
             }
         }
 
@@ -13,7 +13,8 @@ pipeline {
             steps {
                 // Installer les dépendances (ici pour un projet Python)
                 script {
-                    sh 'pip install -r requirements.txt'
+                    // Sur Windows, on utilise 'bat' pour les commandes batch
+                    bat 'pip install -r requirements.txt'
                 }
             }
         }
@@ -22,7 +23,8 @@ pipeline {
             steps {
                 // Lancer les tests (ici, avec pytest)
                 script {
-                    sh 'pytest'
+                    // Utiliser 'bat' pour exécuter pytest sous Windows
+                    bat 'pytest'
                 }
             }
         }
