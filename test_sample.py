@@ -11,11 +11,13 @@ def test_spam_prediction():
     vect_msg = vectorizer.transform([test_message])  # Vectorisation du message
     prediction = model.predict(vect_msg)  # Prédiction avec le modèle
 
-    assert prediction[0] == 'spam', f"Expected 'spam', but got {prediction[0]}"  # Test si c'est bien un spam
+    # Convertir la prédiction en chaîne de caractères pour éviter les problèmes de type
+    assert str(prediction[0]) == 'spam', f"Expected 'spam', but got {str(prediction[0])}"  # Test si c'est bien un spam
 
 def test_ham_prediction():
     test_message = "How are you doing today?"
     vect_msg = vectorizer.transform([test_message])  # Vectorisation du message
     prediction = model.predict(vect_msg)  # Prédiction avec le modèle
 
-    assert prediction[0] == 'ham', f"Expected 'ham', but got {prediction[0]}"  # Test si c'est bien un ham
+    # Convertir la prédiction en chaîne de caractères pour éviter les problèmes de type
+    assert str(prediction[0]) == 'ham', f"Expected 'ham', but got {str(prediction[0])}"  # Test si c'est bien un ham
