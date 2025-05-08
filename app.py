@@ -6,8 +6,8 @@ from sklearn.metrics import accuracy_score
 app = Flask(__name__)
 
 # Charger le modèle et le vectorizer
-model = joblib.load('/app/spam_classifier.pkl')
-vectorizer = joblib.load('/app/vectorizer.pkl')
+model = joblib.load('/spam_classifier.pkl')
+vectorizer = joblib.load('/vectorizer.pkl')
 
 # HTML de base intégré
 HTML_FORM = """
@@ -49,3 +49,6 @@ def monitor():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+import logging
+logging.basicConfig(filename='monitor.log', level=logging.INFO)
+logging.info(f'Accuracy en production : {accuracy}')

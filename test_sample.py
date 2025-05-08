@@ -1,10 +1,21 @@
-# test_sample.py
+import joblib
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-def test_addition():
-    assert 1 + 1 == 2  # Test de base pour vérifier l'addition
+# Charger le modèle et le vectorizer sauvegardés
+model = joblib.load(r'C:/Users/marie/MLOPS/spam_classifier.pkl')
+vectorizer = joblib.load(r'C:/Users/marie/MLOPS/vectorizer.pkl')
 
-def test_subtraction():
-    assert 2 - 1 == 1  # Test pour vérifier la soustraction
+# Exemple de message à tester
+def test_spam_prediction():
+    test_message = "Congratulations! You've won a free ticket to Bahamas."
+    vect_msg = vectorizer.transform([test_message])  # Vectorisation du message
+    prediction = model.predict(vect_msg)  # Prédiction avec le modèle
 
-def test_multiplication():
-    assert 2 * 3 == 6  # Test pour vérifier la multiplication
+    assert prediction[0] == 'spam', f"Expected 'spam', but got {prediction[0]}"  # Test si c'est bien un spam
+
+def test_ham_prediction():
+    test_message = "How are you doing today?"
+    vect_msg = vectorizer.transform([test_message])  # Vectorisation du message
+    prediction = model.predict(vect_msg)  # Prédiction avec le modèle
+
+    assert prediction[0] == 'ham', f"Expected 'ham', but got {prediction[0]}"  # Test si c'est bien un ham
