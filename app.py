@@ -1,11 +1,10 @@
 from flask import Flask, request, render_template_string
 import joblib
-import pandas as pd
-from sklearn.metrics import accuracy_score
-import logging
 import re
 import nltk
 from nltk.corpus import stopwords
+from sklearn.metrics import accuracy_score
+import logging
 
 # Initialiser Flask
 app = Flask(__name__)
@@ -14,7 +13,7 @@ app = Flask(__name__)
 model = joblib.load('spam_classifier.pkl')
 vectorizer = joblib.load('vectorizer.pkl')
 
-# Téléchargement des stopwords
+# Télécharger les stopwords
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 
@@ -48,20 +47,25 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    message = request.form['message']
-    cleaned_message = clean_text(message)
-    vect_msg = vectorizer.transform([cleaned_message])
-    prediction = model.predict(vect_msg)
-    result = "SPAM" if prediction[0] == 'spam' else "HAM"
-    
-    # Enregistrement dans les logs
-    logging.info(f'Predicted: {result} for message: {message}')
-    
-    # Stocker la prédiction pour suivi de performance
-    predictions_list.append(prediction[0])
-    labels_list.append('spam' if result == "SPAM" else 'ham')
+    try:
+        message = request.form['message']
+        cleaned_message = clean_text(message)
+        vect_msg = vectorizer.transform([cleaned_message])
+        prediction = model.predict(vect_msg)
+        result = "SPAM" if prediction[0] == 'spam' else "HAM"
+        
+        # Enregistrement dans les logs
+        logging.info(f'Predicted: {result} for message: {message}')
+        
+        # Stocker la prédiction pour suivi de performance
+        predictions_list.append(prediction[0])
+        labels_list.append('spam' if result == "SPAM" else 'ham')
 
-    return f"<h3>Résultat : {result}</h3><a href='/'>↩ Retour</a>"
+        return f"<h3>Résultat : {result}</h3><a href='/'>↩ Retour</a>"
+    
+    except Exception as e:
+        logging.error(f"Error processing message: {e}")
+        return "<h3>Erreur lors du traitement du message. Veuillez réessayer.</h3>"
 
 @app.route('/monitor')
 def monitor():

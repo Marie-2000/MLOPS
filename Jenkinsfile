@@ -24,7 +24,7 @@ pipeline {
                 // Lancer les tests (ici, avec pytest)
                 script {
                     // Utiliser 'bat' pour exécuter pytest sous Windows
-                    bat 'pytest'
+                    bat 'pytest --maxfail=1 --disable-warnings -q'
                 }
             }
         }
