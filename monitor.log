@@ -1,0 +1,80 @@
+2025-05-08 23:20:34,836 -  * Debugger is active!
+2025-05-08 23:20:34,850 -  * Debugger PIN: 623-432-031
+2025-05-08 23:20:44,971 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\app.py', reloading
+2025-05-08 23:20:48,586 -  * Debugger is active!
+2025-05-08 23:20:48,595 -  * Debugger PIN: 623-432-031
+2025-05-08 23:21:13,824 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\app.py', reloading
+2025-05-08 23:21:27,061 -  * Debugger is active!
+2025-05-08 23:21:27,068 -  * Debugger PIN: 623-432-031
+2025-05-08 23:21:35,146 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\app.py', reloading
+2025-05-08 23:21:37,926 -  * Debugger is active!
+2025-05-08 23:21:37,937 -  * Debugger PIN: 623-432-031
+2025-05-08 23:21:51,566 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.188:5000
+2025-05-08 23:21:51,566 - [33mPress CTRL+C to quit[0m
+2025-05-08 23:21:51,568 -  * Restarting with stat
+2025-05-08 23:21:53,607 -  * Debugger is active!
+2025-05-08 23:21:53,613 -  * Debugger PIN: 623-432-031
+2025-05-08 23:22:26,869 - 127.0.0.1 - - [08/May/2025 23:22:26] "GET / HTTP/1.1" 200 -
+2025-05-08 23:22:38,509 - Predicted: HAM for message: how are you doing
+2025-05-08 23:22:38,510 - 127.0.0.1 - - [08/May/2025 23:22:38] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:22:44,227 - Accuracy en production : 1.00
+2025-05-08 23:22:44,228 - 127.0.0.1 - - [08/May/2025 23:22:44] "GET /monitor HTTP/1.1" 200 -
+2025-05-08 23:22:56,430 - Predicted: HAM for message: what time is it 
+2025-05-08 23:22:56,431 - 127.0.0.1 - - [08/May/2025 23:22:56] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:23:05,831 - Accuracy en production : 1.00
+2025-05-08 23:23:05,831 - 127.0.0.1 - - [08/May/2025 23:23:05] "GET /monitor HTTP/1.1" 200 -
+2025-05-08 23:23:14,367 - Predicted: HAM for message: what time is it 
+2025-05-08 23:23:14,368 - 127.0.0.1 - - [08/May/2025 23:23:14] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:23:22,225 - Predicted: HAM for message: call me 
+2025-05-08 23:23:22,226 - 127.0.0.1 - - [08/May/2025 23:23:22] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:23:27,881 - Predicted: HAM for message: so
+2025-05-08 23:23:27,881 - 127.0.0.1 - - [08/May/2025 23:23:27] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:23:29,646 - 127.0.0.1 - - [08/May/2025 23:23:29] "GET / HTTP/1.1" 200 -
+2025-05-08 23:23:35,322 - Predicted: HAM for message: call 
+2025-05-08 23:23:35,323 - 127.0.0.1 - - [08/May/2025 23:23:35] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:23:48,459 - Predicted: HAM for message: credit
+2025-05-08 23:23:48,460 - 127.0.0.1 - - [08/May/2025 23:23:48] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:24:02,211 - Predicted: HAM for message: england
+2025-05-08 23:24:02,213 - 127.0.0.1 - - [08/May/2025 23:24:02] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:24:03,971 - 127.0.0.1 - - [08/May/2025 23:24:03] "GET / HTTP/1.1" 200 -
+2025-05-08 23:24:23,588 - Predicted: HAM for message: thanks
+2025-05-08 23:24:23,589 - 127.0.0.1 - - [08/May/2025 23:24:23] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:24:32,503 - Predicted: SPAM for message: call me now it's urgent
+2025-05-08 23:24:32,504 - 127.0.0.1 - - [08/May/2025 23:24:32] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:24:42,829 - Accuracy en production : 1.00
+2025-05-08 23:24:42,830 - 127.0.0.1 - - [08/May/2025 23:24:42] "GET /monitor HTTP/1.1" 200 -
+2025-05-08 23:25:14,650 - Predicted: HAM for message: what is wrong with you
+2025-05-08 23:25:14,651 - 127.0.0.1 - - [08/May/2025 23:25:14] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:25:16,680 - 127.0.0.1 - - [08/May/2025 23:25:16] "GET / HTTP/1.1" 200 -
+2025-05-08 23:25:24,466 - Predicted: HAM for message: harry up 
+2025-05-08 23:25:24,467 - 127.0.0.1 - - [08/May/2025 23:25:24] "POST /predict HTTP/1.1" 200 -
+2025-05-08 23:25:26,142 - 127.0.0.1 - - [08/May/2025 23:25:26] "GET / HTTP/1.1" 200 -
+2025-05-08 23:25:34,663 - Accuracy en production : 1.00
+2025-05-08 23:25:34,664 - 127.0.0.1 - - [08/May/2025 23:25:34] "GET /monitor HTTP/1.1" 200 -
+2025-05-09 00:01:42,244 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\predict_model.py', reloading
+2025-05-09 00:01:43,389 -  * Restarting with stat
+2025-05-09 00:01:47,440 -  * Debugger is active!
+2025-05-09 00:01:47,447 -  * Debugger PIN: 623-432-031
+2025-05-09 00:02:56,123 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\app.py', reloading
+2025-05-09 00:02:56,659 -  * Restarting with stat
+2025-05-09 00:03:01,843 -  * Debugger is active!
+2025-05-09 00:03:01,853 -  * Debugger PIN: 623-432-031
+2025-05-09 00:03:10,960 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\predict_model.py', reloading
+2025-05-09 00:03:11,509 -  * Restarting with stat
+2025-05-09 00:03:15,526 -  * Debugger is active!
+2025-05-09 00:03:15,533 -  * Debugger PIN: 623-432-031
+2025-05-09 00:04:26,191 -  * Detected change in 'C:\\Users\\marie\\MLOPS\\predict_model.py', reloading
+2025-05-09 00:04:26,756 -  * Restarting with stat
+2025-05-09 00:04:30,718 -  * Debugger is active!
+2025-05-09 00:04:30,733 -  * Debugger PIN: 623-432-031
+2025-05-09 00:04:36,893 - Predicted: HAM for message: you won a free flight
+2025-05-09 00:04:36,895 - 127.0.0.1 - - [09/May/2025 00:04:36] "POST /predict HTTP/1.1" 200 -
+2025-05-09 00:04:43,754 - Predicted: HAM for message: you've won a free flight
+2025-05-09 00:04:43,755 - 127.0.0.1 - - [09/May/2025 00:04:43] "POST /predict HTTP/1.1" 200 -
+2025-05-09 00:05:10,516 - Predicted: HAM for message: get cheap med 
+2025-05-09 00:05:10,516 - 127.0.0.1 - - [09/May/2025 00:05:10] "POST /predict HTTP/1.1" 200 -
+2025-05-09 00:05:17,480 - Accuracy en production : 1.00
+2025-05-09 00:05:17,480 - 127.0.0.1 - - [09/May/2025 00:05:17] "GET /monitor HTTP/1.1" 200 -

@@ -2,12 +2,34 @@ from flask import Flask, request, render_template_string
 import joblib
 import pandas as pd
 from sklearn.metrics import accuracy_score
+import logging
+import re
+import nltk
+from nltk.corpus import stopwords
 
+# Initialiser Flask
 app = Flask(__name__)
 
 # Charger le modèle et le vectorizer
-model = joblib.load('/spam_classifier.pkl')
-vectorizer = joblib.load('/vectorizer.pkl')
+model = joblib.load('spam_classifier.pkl')
+vectorizer = joblib.load('vectorizer.pkl')
+
+# Téléchargement des stopwords
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
+
+# Fonction de nettoyage du texte
+def clean_text(text):
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
+    text = text.lower()
+    return ' '.join([word for word in text.split() if word not in stop_words])
+
+# Listes pour stocker les prédictions et les labels
+predictions_list = []
+labels_list = []
+
+# Configuration du logger
+logging.basicConfig(filename='monitor.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # HTML de base intégré
 HTML_FORM = """
@@ -27,28 +49,28 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     message = request.form['message']
-    vect_msg = vectorizer.transform([message])
+    cleaned_message = clean_text(message)
+    vect_msg = vectorizer.transform([cleaned_message])
     prediction = model.predict(vect_msg)
     result = "SPAM" if prediction[0] == 'spam' else "HAM"
+    
+    # Enregistrement dans les logs
+    logging.info(f'Predicted: {result} for message: {message}')
+    
+    # Stocker la prédiction pour suivi de performance
+    predictions_list.append(prediction[0])
+    labels_list.append('spam' if result == "SPAM" else 'ham')
+
     return f"<h3>Résultat : {result}</h3><a href='/'>↩ Retour</a>"
 
 @app.route('/monitor')
 def monitor():
-    # Exemple de données de test pour la surveillance
-    test_data = pd.DataFrame({
-        'message': ['Free money!!!', 'How are you?', 'Win a prize now!', 'See you tomorrow'],
-        'label': ['spam', 'ham', 'spam', 'ham']
-    })
+    if len(predictions_list) == 0:
+        return "<h3>Aucun message n'a encore été classé.</h3>"
     
-    X_test = vectorizer.transform(test_data['message'])
-    y_true = test_data['label']
-    y_pred = model.predict(X_test)
-    
-    accuracy = accuracy_score(y_true, y_pred)
+    accuracy = accuracy_score(labels_list, predictions_list)
+    logging.info(f'Accuracy en production : {accuracy:.2f}')
     return f"<h3>Accuracy en production : {accuracy:.2f}</h3>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-import logging
-logging.basicConfig(filename='monitor.log', level=logging.INFO)
-logging.info(f'Accuracy en production : {accuracy}')
