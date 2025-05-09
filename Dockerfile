@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . /app
 # (Assurez-vous que spam_classifier.pkl est dans le même répertoire que votre Dockerfile)
 #COPY spam_classifier.pkl /app/spam_classifier.pkl
+EXPOSE 5000
 
 # Étape 4: Installer les dépendances via le fichier requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
